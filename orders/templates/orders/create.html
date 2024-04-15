@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Details</title>
+</head>
+<body>
+<h1>Checkout</h1>
+    <div class="order-info">
+        <h3>Your order</h3>
+    <ul>
+    {% for item in cart %}
+        <li>
+          {{ item.quantity }}x {{ item.product.name }}
+          <span>${{ item.total_price }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+    <p>Total: ${{ cart.get_total_price }}</p>
+</div>
+<form action="{% url 'orders:add_customer' %}" method="post">
+    {% csrf_token %}
+
+    <div>
+        {{form.as_p}}
+    </div>
+
+    <input type="Submit" value="Add detail to make Payment">
+</form>
+</body>
+</html>
